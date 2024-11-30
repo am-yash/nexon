@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask and HTML Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Flask with HTML</h1>
+        <p>Click the button below to see a message fetched from the Flask server:</p>
+        <button onclick="fetchMessage()">Get Message</button>
+        <p id="message" style="margin-top: 20px; font-weight: bold;"></p>
+    </div>
+    <script>
+        async function fetchMessage() {
+            try {
+                const response = await fetch('/get-message');
+                const data = await response.json();
+                document.getElementById('message').innerText = data.message;
+            } catch (error) {
+                document.getElementById('message').innerText = 'Error fetching message!';
+            }
+        }
+    </script>
+</body>
+</html>
